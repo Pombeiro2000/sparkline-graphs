@@ -49,6 +49,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js"></script>
 
     <script>
         $(function () {
@@ -69,6 +70,33 @@
                 height: "40",
                 colors: "indigo,silver,linen,khaki,crimson",
                 type: "pie"
+            });
+
+            $.ajax({
+                url: 'dataset.csv',
+                dataType: 'text',
+
+                success: function (response) {
+                    const linhas = $.csv.toArrays(response);
+
+                    // Se o CSV tiver uma linha de cabeçalho, use linhas.slice(1).
+                    const linhasDeDados = linhas;
+
+                    const vendas = linhasDeDados.map(function (linha) {
+                        return linha.map(Number);
+                    });
+
+                    console.table(vendas);
+
+                    $('.dsChart').sparkline(vendas, {
+                        type: 'bar',
+                        stackedBarColor: ['#f44336', '#2196f3']
+                    });
+                },
+
+                error: function () {
+                    $('.dsChart').text('Não foi possível carregar dataset.csv.');
+                }
             });
         });
 
