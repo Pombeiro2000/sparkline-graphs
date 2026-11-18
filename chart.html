@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div class="container-fluid">~
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6">
                 <table class="table table-sm table-hover table-striped table-bordered">
@@ -21,20 +21,24 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td>1,4,4,7,5,9,10</td>
                             <td><span class="inlinesparkline">1,4,4,7,5,9,10</span></td>
                         </tr>
                         <tr>
-                            <td><span class="dynamicsparkline">A carregar…</span>
-                            </td>
+                            <td>A carregar…</td>
+                            <td><span class="dynamicsparkline">A carregar…</span></td>
                         </tr>
                         <tr>
+                            <td>A carregar…</td>
                             <td><span class="dynamicbar">A carregar…</span></td>
                         </tr>
                         <tr>
-                            <td><span class="inlinebar">1,3,4,5,3,5</span>
-                            </td>
+                            <td>1,3,4,5,3,5</td>
+                            <td><span class="inlinebar">1,3,4,5,3,5</span></td>
                         </tr>
-                        <tr><span class="dsChart">A carregar…</span>
+                        <tr>
+                            <td>A carregar…</td>
+                            <td><span class="dsChart">A carregar…</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -49,7 +53,26 @@
     <script>
         $(function () {
             $('.inlinesparkline').sparkline();
+
+            const myvalues = [10, 8, 5, 7, 4, 4, 1];
+
+            $('.dynamicsparkline').sparkline(myvalues);
+
+            $('.dynamicbar').sparkline(myvalues, {
+                type: 'bar',
+                barColor: 'green'
+            });
+            $('.inlinebar').sparkline(myvalues, {
+                sparklin: "true",
+                points: myvalues,
+                width: "40",
+                height: "40",
+                colors: "indigo,silver,linen,khaki,crimson",
+                type: "pie"
+            });
         });
+
+
     </script>
 </body>
 
